@@ -1,0 +1,20 @@
+# NyxOS .gitignore
+
+# Vercel
+.vercel/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
