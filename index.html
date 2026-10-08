@@ -6,56 +6,80 @@
   <title>NyxOS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
+    /* ================================================================
+       NYXOS v2 — "Midnight Luxe"
+       Bukan dark tech generik. Bukan AI slop.
+       Deep, warm, dan punya nyawa.
+       ================================================================ */
+
     /* ===== RESET ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
     img, svg { display: block; }
     button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
     input, textarea { font: inherit; color: inherit; }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.16); }
 
     /* ===== TOKENS ===== */
     :root {
-      --bg-deepest:   #0a0a0f;
-      --bg-dark:      #12121a;
-      --bg-surface:   #1a1a28;
-      --bg-card:      #22223a;
-      --bg-glass:     rgba(26, 26, 40, 0.75);
-      --border:       rgba(255,255,255,0.08);
-      --border-light: rgba(255,255,255,0.12);
+      /* Palet — bukan hitam pekat, bukan neon */
+      --bg-deepest:   #0b0a12;
+      --bg-dark:      #12101e;
+      --bg-surface:   #1a1728;
+      --bg-card:      #1f1c30;
+      --bg-glass:     rgba(18, 16, 30, 0.78);
+      --bg-glass-alt: rgba(26, 23, 40, 0.85);
 
-      --ink:          #e8e8f0;
-      --ink-soft:     #9898b0;
-      --ink-muted:    #6868a0;
+      --border:       rgba(255,255,255,0.06);
+      --border-light: rgba(255,255,255,0.10);
+      --border-glow:  rgba(240, 165, 0, 0.15);
 
-      --cyan:         #00f0ff;
-      --cyan-dim:     #0098b0;
-      --magenta:      #ff40c0;
-      --magenta-dim:  #b02080;
-      --accent:       #00f0ff;
-      --accent2:      #ff40c0;
-      --green:        #40ff80;
-      --yellow:       #ffd040;
-      --red:          #ff4060;
-      --orange:       #ff8040;
+      /* Teks — cream, bukan putih menyilaukan */
+      --ink:          #eae8f0;
+      --ink-soft:     #9895b0;
+      --ink-muted:    #6b6890;
+      --ink-dim:      #4a4868;
 
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
+      /* Aksen — emas hangat, bukan cyan/magenta */
+      --gold:         #f0a500;
+      --gold-dim:     #c48800;
+      --gold-soft:    rgba(240, 165, 0, 0.12);
+      --ember:        #e06030;
+      --plum:         #7a4a8a;
+      --plum-dim:     #5a3a6a;
+      --cream:        #fffffe;
 
+      /* Font */
+      --font-display: 'Outfit', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+
+      /* Radius */
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
       --radius-xl: 20px;
 
-      --shadow-window: 0 8px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
-      --shadow-glass:  0 4px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
-      --shadow-glow:   0 0 24px rgba(0,240,255,0.15);
+      /* Shadows */
+      --shadow-window: 0 8px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+      --shadow-glass:  0 4px 32px rgba(0,0,0,0.5);
+      --shadow-glow:   0 0 24px rgba(240, 165, 0, 0.06);
 
+      /* Transitions */
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-glass: cubic-bezier(0.22, 1, 0.36, 1);
       --duration: 200ms;
@@ -63,7 +87,7 @@
 
     /* ===== BASE ===== */
     body {
-      font-family: var(--font-display);
+      font-family: var(--font-body);
       background: var(--bg-deepest);
       color: var(--ink);
       user-select: none;
@@ -77,198 +101,220 @@
       overflow: hidden;
     }
 
-    /* Animated Background */
+    /* Animated Background — warm, deep, bukan grid cyberpunk */
     #bgCanvas {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       z-index: 0;
     }
 
-    /* Desktop Grid Icons */
+    /* ===== DESKTOP ICONS ===== */
     #desktopIcons {
-      position: absolute; left: 20px; top: 20px; bottom: 60px;
+      position: absolute;
+      left: 20px; top: 20px; bottom: 56px;
       display: flex; flex-direction: column; flex-wrap: wrap;
-      gap: 8px; align-content: flex-start;
+      gap: 6px; align-content: flex-start;
       z-index: 1; padding: 4px;
     }
 
     .desk-icon {
       display: flex; flex-direction: column; align-items: center;
       justify-content: center; gap: 6px;
-      width: 80px; padding: 10px 4px 8px;
+      width: 76px; padding: 10px 4px 8px;
       border-radius: var(--radius-md);
       color: var(--ink-soft);
       font-size: 11px; font-weight: 500;
+      font-family: var(--font-body);
       text-align: center; line-height: 1.3;
-      transition: background var(--duration), color var(--duration);
+      transition: background 180ms, color 180ms;
       cursor: pointer;
     }
-    .desk-icon:hover { background: rgba(255,255,255,0.06); color: var(--ink); }
-    .desk-icon:active { background: rgba(255,255,255,0.10); }
-    .desk-icon.selected { background: rgba(0,240,255,0.10); color: var(--cyan); }
+    .desk-icon:hover { background: rgba(255,255,255,0.04); color: var(--ink); }
+    .desk-icon:active { background: rgba(255,255,255,0.07); }
+    .desk-icon.selected {
+      background: rgba(240, 165, 0, 0.06);
+      color: var(--gold);
+    }
     .desk-icon .icon-wrap {
       width: 48px; height: 48px;
       border-radius: var(--radius-md);
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      transition: border-color var(--duration), transform var(--duration);
+      transition: border-color 180ms, transform 180ms;
+      color: var(--ink-soft);
     }
-    .desk-icon:hover .icon-wrap { border-color: var(--border-light); transform: scale(1.05); }
-    .desk-icon.selected .icon-wrap { border-color: var(--cyan); box-shadow: 0 0 16px rgba(0,240,255,0.15); }
+    .desk-icon:hover .icon-wrap {
+      border-color: var(--border-light);
+      transform: scale(1.04);
+    }
+    .desk-icon.selected .icon-wrap {
+      border-color: rgba(240, 165, 0, 0.25);
+      color: var(--gold);
+    }
 
     /* ===== TASKBAR ===== */
     #taskbar {
       position: fixed; bottom: 0; left: 0; right: 0;
-      height: 52px; z-index: 1000;
+      height: 48px; z-index: 1000;
       background: var(--bg-glass);
-      backdrop-filter: blur(20px) saturate(1.2);
-      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      backdrop-filter: blur(24px) saturate(1.1);
+      -webkit-backdrop-filter: blur(24px) saturate(1.1);
       border-top: 1px solid var(--border);
       display: flex; align-items: center;
-      padding: 0 12px;
-      gap: 4px;
+      padding: 0 10px;
+      gap: 2px;
     }
 
-    #taskbar .tb-left { display: flex; align-items: center; gap: 4px; }
+    #taskbar .tb-left { display: flex; align-items: center; gap: 2px; }
     #taskbar .tb-center {
       flex: 1; display: flex; align-items: center;
-      justify-content: center; gap: 4px;
-      overflow-x: auto; padding: 0 8px;
+      justify-content: center; gap: 2px;
+      overflow-x: auto; padding: 0 6px;
     }
     #taskbar .tb-right {
-      display: flex; align-items: center; gap: 8px;
+      display: flex; align-items: center; gap: 10px;
       font-size: 12px; font-weight: 500; color: var(--ink-soft);
     }
 
     .tb-btn {
-      width: 36px; height: 36px;
+      width: 34px; height: 34px;
       border-radius: var(--radius-sm);
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      transition: background var(--duration);
+      font-size: 16px;
+      transition: background 150ms;
       color: var(--ink-soft);
     }
-    .tb-btn:hover { background: rgba(255,255,255,0.08); color: var(--ink); }
-    .tb-btn:active { background: rgba(255,255,255,0.12); }
-
-    #startBtn.active { background: rgba(0,240,255,0.12); color: var(--cyan); }
+    .tb-btn:hover { background: rgba(255,255,255,0.06); color: var(--ink); }
+    .tb-btn:active { background: rgba(255,255,255,0.10); }
+    #startBtn.active { background: rgba(240, 165, 0, 0.08); color: var(--gold); }
 
     .tb-task {
-      display: flex; align-items: center; gap: 8px;
-      padding: 6px 14px;
+      display: flex; align-items: center; gap: 7px;
+      padding: 5px 12px;
       border-radius: var(--radius-sm);
       font-size: 12px; font-weight: 500;
       color: var(--ink-soft);
       background: transparent;
       border: 1px solid transparent;
-      transition: background var(--duration), border-color var(--duration), color var(--duration);
-      max-width: 180px;
+      transition: background 150ms, border-color 150ms, color 150ms;
+      max-width: 160px;
       cursor: pointer;
     }
-    .tb-task:hover { background: rgba(255,255,255,0.06); color: var(--ink); }
-    .tb-task.active { background: rgba(0,240,255,0.08); border-color: rgba(0,240,255,0.2); color: var(--cyan); }
-    .tb-task .task-icon { font-size: 14px; flex-shrink: 0; }
-    .tb-task .task-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tb-task:hover { background: rgba(255,255,255,0.04); color: var(--ink); }
+    .tb-task.active {
+      background: rgba(240, 165, 0, 0.06);
+      border-color: rgba(240, 165, 0, 0.12);
+      color: var(--gold);
+    }
+    .tb-task .task-icon { width: 14px; height: 14px; flex-shrink: 0; }
+    .tb-task .task-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
 
     .tb-clock {
-      padding: 0 8px;
+      padding: 0 6px;
       font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--ink-soft);
+      font-size: 11px;
+      color: var(--ink-muted);
+      letter-spacing: 0.02em;
       cursor: pointer;
-      transition: color var(--duration);
+      transition: color 150ms;
     }
-    .tb-clock:hover { color: var(--ink); }
+    .tb-clock:hover { color: var(--ink-soft); }
 
     /* ===== START MENU ===== */
     #startMenu {
-      position: fixed; bottom: 60px; left: 12px;
-      width: 360px; max-height: 480px;
-      background: var(--bg-glass);
-      backdrop-filter: blur(24px) saturate(1.3);
-      -webkit-backdrop-filter: blur(24px) saturate(1.3);
-      border: 1px solid var(--border);
+      position: fixed; bottom: 54px; left: 10px;
+      width: 340px; max-height: 460px;
+      background: var(--bg-glass-alt);
+      backdrop-filter: blur(28px) saturate(1.2);
+      -webkit-backdrop-filter: blur(28px) saturate(1.2);
+      border: 1px solid var(--border-light);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-window);
       z-index: 999;
       display: none;
       flex-direction: column;
-      padding: 12px;
+      padding: 10px;
       overflow: hidden;
     }
     #startMenu.open { display: flex; }
 
     #startMenu .sm-header {
       display: flex; align-items: center; gap: 12px;
-      padding: 8px 8px 16px;
+      padding: 6px 8px 14px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     #startMenu .sm-avatar {
-      width: 40px; height: 40px;
+      width: 38px; height: 38px;
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, var(--cyan), var(--magenta));
+      background: linear-gradient(145deg, var(--gold), var(--ember));
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; font-weight: 700; color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700; font-size: 18px; color: var(--bg-deepest);
     }
     #startMenu .sm-user {
-      font-size: 14px; font-weight: 600;
+      font-size: 13px; font-weight: 600; color: var(--ink);
     }
     #startMenu .sm-user small {
-      display: block; font-size: 11px; font-weight: 400;
-      color: var(--ink-soft); margin-top: 2px;
+      display: block; font-size: 10px; font-weight: 400;
+      color: var(--ink-muted); margin-top: 1px;
+      letter-spacing: 0.03em;
     }
 
     .sm-apps {
       flex: 1; overflow-y: auto;
-      display: flex; flex-direction: column; gap: 2px;
-      padding: 4px 0;
+      display: flex; flex-direction: column; gap: 1px;
+      padding: 2px 0;
     }
     .sm-app {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 12px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 10px;
       border-radius: var(--radius-sm);
       font-size: 13px; font-weight: 500;
       color: var(--ink-soft);
-      transition: background var(--duration), color var(--duration);
+      transition: background 150ms, color 150ms;
       cursor: pointer;
     }
-    .sm-app:hover { background: rgba(255,255,255,0.06); color: var(--ink); }
-    .sm-app .sm-icon { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
+    .sm-app:hover { background: rgba(255,255,255,0.04); color: var(--ink); }
+    .sm-app .sm-icon { width: 20px; height: 20px; flex-shrink: 0; }
     .sm-app .sm-shortcut {
-      margin-left: auto; font-size: 10px;
+      margin-left: auto; font-size: 9px;
       font-family: var(--font-mono);
-      color: var(--ink-muted);
+      color: var(--ink-dim);
       background: var(--bg-surface);
-      padding: 2px 6px; border-radius: 3px;
+      padding: 2px 5px; border-radius: 3px;
+      letter-spacing: 0.02em;
     }
 
     /* ===== WINDOWS ===== */
     .window {
       position: absolute;
-      min-width: 320px; min-height: 200px;
-      background: var(--bg-glass);
-      backdrop-filter: blur(24px) saturate(1.2);
-      -webkit-backdrop-filter: blur(24px) saturate(1.2);
-      border: 1px solid var(--border);
+      min-width: 300px; min-height: 180px;
+      background: var(--bg-glass-alt);
+      backdrop-filter: blur(28px) saturate(1.15);
+      -webkit-backdrop-filter: blur(28px) saturate(1.15);
+      border: 1px solid var(--border-light);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-window);
       z-index: 10;
       display: flex; flex-direction: column;
-      animation: windowOpen 250ms var(--ease-glass) both;
+      animation: windowOpen 280ms var(--ease-glass) both;
     }
     .window.minimized { display: none; }
     .window.maximized {
       border-radius: 0 !important;
       top: 0 !important; left: 0 !important;
-      width: 100% !important; height: calc(100% - 52px) !important;
+      width: 100% !important; height: calc(100% - 48px) !important;
     }
-    .window.focused { z-index: 100; border-color: rgba(0,240,255,0.2); }
+    .window.focused {
+      z-index: 100;
+      border-color: rgba(240, 165, 0, 0.12);
+      box-shadow: var(--shadow-window), var(--shadow-glow);
+    }
 
     @keyframes windowOpen {
-      from { opacity: 0; transform: scale(0.92) translateY(12px); }
+      from { opacity: 0; transform: scale(0.94) translateY(10px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
@@ -283,154 +329,154 @@
     .win-titlebar:active { cursor: grabbing; }
     .window.maximized .win-titlebar { border-radius: 0; }
 
-    .win-icon { font-size: 16px; flex-shrink: 0; }
+    .win-icon { width: 16px; height: 16px; flex-shrink: 0; }
     .win-title {
-      flex: 1; font-size: 13px; font-weight: 600;
+      flex: 1; font-size: 12px; font-weight: 600;
+      font-family: var(--font-body);
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      color: var(--ink-soft);
     }
     .win-controls { display: flex; gap: 6px; }
     .win-ctrl {
-      width: 14px; height: 14px;
+      width: 12px; height: 12px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 8px; color: transparent;
+      font-size: 7px; color: transparent;
       transition: color 150ms;
       border: none;
     }
-    .win-ctrl:hover { color: rgba(0,0,0,0.6); }
-    .win-close { background: #ff4060; }
-    .win-min { background: #ffd040; }
-    .win-max { background: #40ff80; }
+    .win-ctrl:hover { color: rgba(0,0,0,0.5); }
+    .win-close { background: #e06030; }
+    .win-min { background: var(--gold); }
+    .win-max { background: #60b080; }
 
     .win-body {
       flex: 1; overflow: auto;
-      padding: 16px;
+      padding: 14px;
       min-height: 0;
     }
 
     /* ===== FILE MANAGER ===== */
     .fm-toolbar {
-      display: flex; align-items: center; gap: 8px;
-      padding: 0 0 12px;
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 0 10px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       flex-wrap: wrap;
     }
     .fm-path {
       flex: 1; display: flex; align-items: center;
-      gap: 4px; font-size: 12px; font-weight: 500;
-      color: var(--ink-soft); font-family: var(--font-mono);
+      gap: 3px; font-size: 11px; font-weight: 500;
+      color: var(--ink-muted); font-family: var(--font-mono);
       background: var(--bg-surface);
-      padding: 6px 10px; border-radius: var(--radius-sm);
+      padding: 5px 8px; border-radius: var(--radius-sm);
       border: 1px solid var(--border);
       min-width: 0;
     }
     .fm-path span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .fm-path .sep { color: var(--ink-muted); margin: 0 2px; }
-
-    .fm-btn {
-      width: 32px; height: 32px;
+    .fm-path .sep { color: var(--ink-dim); margin: 0 2px; }
+    .fm-nav-btn {
+      width: 28px; height: 28px;
       border-radius: var(--radius-sm);
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px; color: var(--ink-soft);
-      transition: background var(--duration), color var(--duration);
+      color: var(--ink-muted);
+      transition: background 150ms, color 150ms;
       flex-shrink: 0;
     }
-    .fm-btn:hover { background: rgba(255,255,255,0.08); color: var(--ink); }
+    .fm-nav-btn:hover { background: rgba(255,255,255,0.05); color: var(--ink-soft); }
 
     .fm-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-      gap: 4px;
+      grid-template-columns: repeat(auto-fill, minmax(82px, 1fr));
+      gap: 3px;
     }
     .fm-item {
       display: flex; flex-direction: column; align-items: center;
-      justify-content: center; gap: 6px;
-      padding: 12px 8px 10px;
+      justify-content: center; gap: 5px;
+      padding: 10px 6px 8px;
       border-radius: var(--radius-md);
       cursor: pointer;
       font-size: 11px; font-weight: 500; color: var(--ink-soft);
       text-align: center; line-height: 1.3;
-      transition: background var(--duration), color var(--duration);
+      transition: background 150ms, color 150ms;
     }
-    .fm-item:hover { background: rgba(255,255,255,0.06); color: var(--ink); }
-    .fm-item .fm-icon { font-size: 28px; }
-    .fm-item.folder .fm-icon { filter: drop-shadow(0 0 8px rgba(0,240,255,0.2)); }
+    .fm-item:hover { background: rgba(255,255,255,0.04); color: var(--ink); }
+    .fm-item .fm-icon { width: 28px; height: 28px; }
 
     /* ===== TERMINAL ===== */
     .terminal-body {
-      background: #0c0c14;
-      padding: 12px;
+      background: #0a0912;
+      padding: 10px;
       font-family: var(--font-mono);
-      font-size: 13px; line-height: 1.6;
-      color: #c0c0d0;
+      font-size: 12px; line-height: 1.6;
+      color: #b8b4d0;
       height: 100%;
       display: flex; flex-direction: column;
     }
     .terminal-output {
       flex: 1; overflow-y: auto;
       white-space: pre-wrap; word-break: break-all;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .terminal-output .t-line { padding: 1px 0; }
-    .terminal-output .t-green { color: var(--green); }
-    .terminal-output .t-cyan { color: var(--cyan); }
-    .terminal-output .t-magenta { color: var(--magenta); }
-    .terminal-output .t-yellow { color: var(--yellow); }
-    .terminal-output .t-red { color: var(--red); }
-    .terminal-output .t-dim { color: var(--ink-muted); }
+    .terminal-output .t-gold { color: var(--gold); }
+    .terminal-output .t-green { color: #60b080; }
+    .terminal-output .t-ember { color: var(--ember); }
+    .terminal-output .t-plum { color: var(--plum); }
+    .terminal-output .t-dim { color: var(--ink-dim); }
 
     .terminal-input-line {
       display: flex; align-items: center; gap: 8px;
     }
-    .terminal-prompt { color: var(--green); flex-shrink: 0; }
+    .terminal-prompt { color: var(--gold); flex-shrink: 0; font-size: 12px; }
     .terminal-input {
       flex: 1; background: transparent; border: none;
       outline: none; color: var(--ink);
-      font-family: var(--font-mono); font-size: 13px;
-      caret-color: var(--cyan);
+      font-family: var(--font-mono); font-size: 12px;
+      caret-color: var(--gold);
     }
 
     /* ===== CALCULATOR ===== */
     .calc-body {
-      display: flex; flex-direction: column; gap: 8px;
-      padding: 4px;
+      display: flex; flex-direction: column; gap: 6px;
+      padding: 2px;
     }
     .calc-display {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 16px 20px;
+      padding: 14px 18px;
       text-align: right;
       font-family: var(--font-mono);
-      font-size: 28px; font-weight: 500;
-      min-height: 64px;
+      font-size: 26px; font-weight: 500;
+      min-height: 56px;
       display: flex; align-items: center; justify-content: flex-end;
       overflow: hidden;
+      color: var(--ink);
     }
     .calc-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      gap: 5px;
     }
     .calc-btn {
-      padding: 14px 8px;
+      padding: 12px 6px;
       border-radius: var(--radius-sm);
-      font-size: 16px; font-weight: 600;
+      font-size: 14px; font-weight: 600;
       text-align: center;
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      color: var(--ink);
-      transition: background var(--duration), border-color var(--duration), transform var(--duration);
+      color: var(--ink-soft);
+      transition: background 150ms, border-color 150ms, transform 120ms;
       cursor: pointer;
     }
-    .calc-btn:hover { background: var(--bg-card); border-color: var(--border-light); transform: scale(1.02); }
-    .calc-btn:active { transform: scale(0.96); }
-    .calc-btn.op { color: var(--cyan); }
-    .calc-btn.fn { color: var(--magenta); }
-    .calc-btn.eq { background: var(--cyan); color: var(--bg-deepest); border-color: var(--cyan); }
-    .calc-btn.eq:hover { background: var(--cyan-dim); }
-    .calc-btn.clr { color: var(--red); }
+    .calc-btn:hover { background: var(--bg-card); border-color: var(--border-light); transform: scale(1.03); }
+    .calc-btn:active { transform: scale(0.95); }
+    .calc-btn.op { color: var(--gold); }
+    .calc-btn.fn { color: var(--plum); }
+    .calc-btn.eq { background: var(--gold); color: var(--bg-deepest); border-color: var(--gold); }
+    .calc-btn.eq:hover { background: var(--gold-dim); }
+    .calc-btn.clr { color: var(--ember); }
 
     /* ===== TEXT EDITOR ===== */
     .editor-body {
@@ -438,129 +484,131 @@
       display: flex; flex-direction: column;
     }
     .editor-toolbar {
-      display: flex; gap: 4px; padding: 0 0 10px;
-      border-bottom: 1px solid var(--border); margin-bottom: 10px;
+      display: flex; gap: 3px; padding: 0 0 8px;
+      border-bottom: 1px solid var(--border); margin-bottom: 8px;
     }
     .editor-toolbar .ed-btn {
-      padding: 4px 10px; border-radius: var(--radius-sm);
+      padding: 4px 8px; border-radius: var(--radius-sm);
       font-size: 11px; font-weight: 500;
-      color: var(--ink-soft);
-      transition: background var(--duration), color var(--duration);
+      color: var(--ink-muted);
+      transition: background 150ms, color 150ms;
     }
-    .editor-toolbar .ed-btn:hover { background: rgba(255,255,255,0.08); color: var(--ink); }
+    .editor-toolbar .ed-btn:hover { background: rgba(255,255,255,0.05); color: var(--ink-soft); }
     .editor-textarea {
       flex: 1; background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 12px;
+      padding: 10px;
       font-family: var(--font-mono);
-      font-size: 13px; line-height: 1.7;
-      color: var(--ink);
+      font-size: 12px; line-height: 1.7;
+      color: var(--ink-soft);
       resize: none; outline: none;
-      min-height: 120px;
+      min-height: 100px;
     }
-    .editor-textarea:focus { border-color: rgba(0,240,255,0.3); }
+    .editor-textarea:focus { border-color: rgba(240, 165, 0, 0.15); }
 
     /* ===== SETTINGS ===== */
-    .settings-body { padding: 4px; }
-    .settings-group { margin-bottom: 20px; }
+    .settings-body { padding: 2px; }
+    .settings-group { margin-bottom: 18px; }
     .settings-group h3 {
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; color: var(--ink-muted);
-      margin-bottom: 10px;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--ink-dim);
+      margin-bottom: 8px;
     }
     .setting-row {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 0;
+      padding: 9px 0;
       border-bottom: 1px solid var(--border);
     }
     .setting-row:last-child { border-bottom: none; }
-    .setting-label { font-size: 13px; font-weight: 500; }
-    .setting-label small { display: block; font-size: 11px; font-weight: 400; color: var(--ink-muted); margin-top: 2px; }
+    .setting-label { font-size: 12px; font-weight: 500; }
+    .setting-label small { display: block; font-size: 10px; font-weight: 400; color: var(--ink-muted); margin-top: 1px; }
 
     .toggle {
-      width: 40px; height: 22px;
-      border-radius: 11px;
+      width: 36px; height: 20px;
+      border-radius: 10px;
       background: var(--bg-surface);
       border: 1px solid var(--border);
       position: relative;
       cursor: pointer;
-      transition: background var(--duration), border-color var(--duration);
+      transition: background 180ms, border-color 180ms;
       flex-shrink: 0;
     }
-    .toggle.on { background: var(--cyan-dim); border-color: var(--cyan); }
+    .toggle.on { background: rgba(240, 165, 0, 0.2); border-color: rgba(240, 165, 0, 0.3); }
     .toggle::after {
       content: '';
       position: absolute; top: 2px; left: 2px;
-      width: 16px; height: 16px;
+      width: 14px; height: 14px;
       border-radius: 50%;
-      background: var(--ink-soft);
-      transition: transform var(--duration), background var(--duration);
+      background: var(--ink-dim);
+      transition: transform 180ms, background 180ms;
     }
-    .toggle.on::after { transform: translateX(18px); background: #fff; }
+    .toggle.on::after { transform: translateX(16px); background: var(--gold); }
 
     .select-input {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 6px 10px;
-      font-size: 12px; font-weight: 500;
-      color: var(--ink);
+      padding: 5px 8px;
+      font-size: 11px; font-weight: 500;
+      color: var(--ink-soft);
       outline: none;
       cursor: pointer;
-      min-width: 100px;
+      min-width: 90px;
     }
-    .select-input:focus { border-color: rgba(0,240,255,0.3); }
+    .select-input:focus { border-color: rgba(240, 165, 0, 0.2); }
 
     /* ===== ABOUT ===== */
     .about-body {
       display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 12px;
-      padding: 24px 16px;
+      text-align: center; gap: 10px;
+      padding: 20px 14px;
     }
     .about-logo {
-      width: 72px; height: 72px;
+      width: 64px; height: 64px;
       border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, var(--cyan), var(--magenta));
+      background: linear-gradient(145deg, var(--gold), var(--ember));
       display: flex; align-items: center; justify-content: center;
-      font-size: 32px; font-weight: 700; color: #fff;
-      box-shadow: 0 0 40px rgba(0,240,255,0.2);
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 700; color: var(--bg-deepest);
+      box-shadow: 0 0 32px rgba(240, 165, 0, 0.08);
     }
-    .about-name { font-size: 22px; font-weight: 700; }
-    .about-ver { font-size: 12px; color: var(--ink-muted); font-family: var(--font-mono); }
-    .about-desc { font-size: 13px; color: var(--ink-soft); max-width: 280px; line-height: 1.6; }
+    .about-name { font-size: 20px; font-weight: 700; font-family: var(--font-display); color: var(--ink); }
+    .about-ver { font-size: 11px; color: var(--ink-dim); font-family: var(--font-mono); }
+    .about-desc { font-size: 12px; color: var(--ink-soft); max-width: 260px; line-height: 1.6; }
+    .about-footer { margin-top: 6px; font-size: 10px; color: var(--ink-dim); font-family: var(--font-mono); letter-spacing: 0.03em; }
 
     /* ===== NOTIFICATION ===== */
     .notification {
-      position: fixed; bottom: 64px; right: 16px;
-      background: var(--bg-glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
+      position: fixed; bottom: 58px; right: 14px;
+      background: var(--bg-glass-alt);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-light);
       border-radius: var(--radius-md);
-      padding: 14px 18px;
-      min-width: 260px;
+      padding: 12px 16px;
+      min-width: 240px;
       box-shadow: var(--shadow-window);
       z-index: 2000;
-      display: flex; align-items: flex-start; gap: 12px;
-      animation: notifIn 300ms var(--ease-glass) both;
+      display: flex; align-items: flex-start; gap: 10px;
+      animation: notifIn 320ms var(--ease-glass) both;
     }
     @keyframes notifIn {
-      from { opacity: 0; transform: translateX(40px); }
+      from { opacity: 0; transform: translateX(36px); }
       to { opacity: 1; transform: translateX(0); }
     }
-    .notif-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .notif-icon { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
     .notif-content { flex: 1; }
-    .notif-title { font-size: 13px; font-weight: 600; }
-    .notif-text { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+    .notif-title { font-size: 12px; font-weight: 600; color: var(--ink); }
+    .notif-text { font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
     .notif-close {
-      width: 20px; height: 20px; border-radius: 50%;
+      width: 18px; height: 18px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 10px; color: var(--ink-muted);
-      transition: background var(--duration), color var(--duration);
+      font-size: 9px; color: var(--ink-dim);
+      transition: background 150ms, color 150ms;
       flex-shrink: 0;
     }
-    .notif-close:hover { background: rgba(255,255,255,0.1); color: var(--ink); }
+    .notif-close:hover { background: rgba(255,255,255,0.06); color: var(--ink-soft); }
 
     /* ===== BOOT SCREEN ===== */
     #bootScreen {
@@ -569,35 +617,39 @@
       background: var(--bg-deepest);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 24px;
-      transition: opacity 600ms var(--ease-out);
+      gap: 20px;
+      transition: opacity 500ms var(--ease-out);
     }
     #bootScreen.hidden { opacity: 0; pointer-events: none; }
     #bootScreen .boot-logo {
-      width: 80px; height: 80px;
+      width: 72px; height: 72px;
       border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, var(--cyan), var(--magenta));
+      background: linear-gradient(145deg, var(--gold), var(--ember));
       display: flex; align-items: center; justify-content: center;
-      font-size: 36px; font-weight: 700; color: #fff;
-      animation: bootPulse 1.5s ease-in-out infinite;
+      font-family: var(--font-display);
+      font-size: 32px; font-weight: 700; color: var(--bg-deepest);
+      animation: bootPulse 2s ease-in-out infinite;
     }
     @keyframes bootPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(0,240,255,0.4); }
-      50% { box-shadow: 0 0 0 20px rgba(0,240,255,0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(240, 165, 0, 0.2); }
+      50% { box-shadow: 0 0 0 18px rgba(240, 165, 0, 0); }
     }
-    #bootScreen .boot-name { font-size: 28px; font-weight: 700; }
+    #bootScreen .boot-name {
+      font-family: var(--font-display);
+      font-size: 26px; font-weight: 700; color: var(--ink);
+    }
     #bootScreen .boot-status {
-      font-size: 12px; color: var(--ink-muted);
+      font-size: 11px; color: var(--ink-dim);
       font-family: var(--font-mono);
     }
     .boot-bar {
-      width: 200px; height: 2px;
+      width: 180px; height: 2px;
       background: var(--bg-surface);
       border-radius: 2px; overflow: hidden;
     }
     .boot-bar-fill {
       height: 100%; width: 0%;
-      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      background: linear-gradient(90deg, var(--gold), var(--ember));
       border-radius: 2px;
       transition: width 200ms linear;
     }
@@ -605,11 +657,11 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       #desktopIcons { left: 10px; top: 10px; gap: 4px; }
-      .desk-icon { width: 64px; padding: 6px 2px; font-size: 10px; }
-      .desk-icon .icon-wrap { width: 40px; height: 40px; font-size: 18px; }
-      #startMenu { left: 8px; right: 8px; width: auto; }
-      .window { min-width: 260px; }
-      .calc-btn { padding: 12px 6px; font-size: 14px; }
+      .desk-icon { width: 60px; padding: 6px 2px; font-size: 10px; }
+      .desk-icon .icon-wrap { width: 38px; height: 38px; }
+      #startMenu { left: 6px; right: 6px; width: auto; }
+      .window { min-width: 240px; }
+      .calc-btn { padding: 10px 5px; font-size: 13px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -641,18 +693,22 @@
     <div id="startMenu">
       <div class="sm-header">
         <div class="sm-avatar">N</div>
-        <div class="sm-user">NyxOS <small>Session 1 — Nyx User</small></div>
+        <div class="sm-user">NyxOS <small>Session 1</small></div>
       </div>
       <div class="sm-apps" id="startApps"></div>
     </div>
 
-    <!-- Windows container -->
+    <!-- Windows -->
     <div id="windowsContainer"></div>
 
     <!-- Taskbar -->
     <div id="taskbar">
       <div class="tb-left">
-        <button class="tb-btn" id="startBtn" onclick="toggleStart()" title="Start">◉</button>
+        <button class="tb-btn" id="startBtn" onclick="toggleStart()" title="Start">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
       </div>
       <div class="tb-center" id="taskList"></div>
       <div class="tb-right">
@@ -663,12 +719,42 @@
 
   <script>
     // ===================================================================
-    //  NYXOS — CORE SYSTEM
+    //  NYXOS v2 — CORE SYSTEM
+    //  Bukan AI slop. Bukan dark tech generik.
+    //  "Midnight Luxe" — warm, deep, punya nyawa.
     // ===================================================================
+
+    // ---- SVG Icons Library ----
+    const ICONS = {
+      folder: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>',
+      file: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>',
+      terminal: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
+      calculator: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16" y1="14" x2="16" y2="14.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/><line x1="16" y1="18" x2="16" y2="18.01"/></svg>',
+      edit: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+      settings: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+      info: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+      folderOpen: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6a2 2 0 0 1 2-2h5l2 2h5a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6z"/><path d="M2 14v3a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3"/></svg>',
+      fileDoc: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+      back: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>',
+      forward: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
+      close: '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+      notify: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
+      star: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+      save: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>',
+      trash: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+    };
+
+    const APP_ICONS = {
+      filemanager: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>',
+      terminal: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
+      calculator: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16" y1="14" x2="16" y2="14.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/><line x1="16" y1="18" x2="16" y2="18.01"/></svg>',
+      editor: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+      settings: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+      about: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+    };
 
     // ---- State ----
     const state = {
-      apps: {},
       windows: {},
       windowZ: 10,
       nextWinId: 1,
@@ -678,46 +764,45 @@
       fileSystem: {
         '~': { type: 'folder', children: {
           'Documents': { type: 'folder', children: {
-            'readme.txt': { type: 'file', content: 'Welcome to NyxOS.\n\nThis is a simple text file in your Documents folder.\nFeel free to explore the system!' },
-            'notes.txt': { type: 'file', content: 'NyxOS Notes\n===========\n- Built with vanilla HTML/CSS/JS\n- Desktop environment in the browser\n- Cyberpunk themed' }
+            'readme.txt': { type: 'file', content: 'Welcome to NyxOS.\n\nThis is your personal space. Explore, create, and make it yours.\n\n— NyxOS Team' },
+            'notes.txt': { type: 'file', content: 'NyxOS Notes\n===========\nA desktop OS, reimagined for the browser.\nBuilt with care, not frameworks.' }
           }},
           'Projects': { type: 'folder', children: {
-            'hello.js': { type: 'file', content: '// Hello, NyxOS!\nconsole.log("Welcome to the future.");\n\nfunction greet(name) {\n  return `Hello, ${name}!`;\n}' }
+            'hello.js': { type: 'file', content: '// Welcome to NyxOS\nconsole.log("Hello from the other side.");\n\nconst greet = (name) => `Hello, ${name}!`;' }
           }},
           'System': { type: 'folder', children: {
-            'kernel.log': { type: 'file', content: '[NYXOS KERNEL]\nBoot sequence initialized.\nMemory: 2048MB available\nCPU: NyxCore @ 2.4GHz\nDisplay: 1920x1080 @ 60Hz\nNetwork: nyxnet0 — Connected\nSystem ready.' }
+            'kernel.log': { type: 'file', content: '[NYXOS KERNEL]\nBoot sequence: OK\nMemory: 2048MB available\nCPU: NyxCore @ 2.4GHz\nDisplay: 1920x1080 @ 60Hz\nNetwork: nyxnet0 — Connected\nSession: active\nSystem ready.' }
           }},
           'Pictures': { type: 'folder', children: {} }
         }}
       },
       currentDir: ['~'],
       dirHistory: [['~']],
-      dirHistoryIdx: 0,
-      wallpaper: 'gradient'
+      dirHistoryIdx: 0
     };
 
     // ---- App Definitions ----
     const APP_DEFS = [
-      { id: 'filemanager', name: 'File Manager', icon: '📁', defaultSize: [640, 440] },
-      { id: 'terminal', name: 'Terminal', icon: '⬛', defaultSize: [620, 420] },
-      { id: 'calculator', name: 'Calculator', icon: '🔢', defaultSize: [300, 380] },
-      { id: 'editor', name: 'Text Editor', icon: '📝', defaultSize: [560, 400] },
-      { id: 'settings', name: 'Settings', icon: '⚙️', defaultSize: [480, 420] },
-      { id: 'about', name: 'About NyxOS', icon: 'ℹ️', defaultSize: [380, 340] }
+      { id: 'filemanager', name: 'File Manager', icon: APP_ICONS.filemanager, defaultSize: [620, 420] },
+      { id: 'terminal', name: 'Terminal', icon: APP_ICONS.terminal, defaultSize: [600, 400] },
+      { id: 'calculator', name: 'Calculator', icon: APP_ICONS.calculator, defaultSize: [280, 360] },
+      { id: 'editor', name: 'Text Editor', icon: APP_ICONS.editor, defaultSize: [540, 380] },
+      { id: 'settings', name: 'Settings', icon: APP_ICONS.settings, defaultSize: [460, 400] },
+      { id: 'about', name: 'About NyxOS', icon: APP_ICONS.about, defaultSize: [360, 320] }
     ];
 
     const DESKTOP_APPS = ['filemanager', 'terminal', 'calculator', 'editor', 'settings', 'about'];
 
     // ===================================================================
-    //  BOOT SEQUENCE
+    //  BOOT
     // ===================================================================
 
     const bootMessages = [
       'Initializing kernel...',
-      'Loading NyxCore modules...',
+      'Loading system modules...',
       'Mounting virtual filesystem...',
       'Starting window manager...',
-      'Initializing desktop environment...',
+      'Preparing desktop...',
       'NyxOS ready.'
     ];
 
@@ -738,18 +823,18 @@
             initDesktop();
           }, 400);
         }
-      }, 350);
+      }, 300);
     }
 
     // ===================================================================
-    //  BACKGROUND CANVAS (Animated Gradient + Particles)
+    //  BACKGROUND CANVAS — warm, organic, bukan grid
     // ===================================================================
 
     function initBg() {
       const canvas = document.getElementById('bgCanvas');
       const ctx = canvas.getContext('2d');
       let w, h, time = 0;
-      const particles = [];
+      const drops = [];
 
       function resize() {
         w = canvas.width = window.innerWidth;
@@ -758,62 +843,63 @@
       resize();
       window.addEventListener('resize', resize);
 
-      // Create particles
-      for (let i = 0; i < 60; i++) {
-        particles.push({
+      // Warm floating orbs — subtle
+      const orbs = [
+        { x: 0.2, y: 0.3, r: 0.35, speed: 0.2, color: 'rgba(240,165,0,' },
+        { x: 0.8, y: 0.6, r: 0.3, speed: 0.15, color: 'rgba(224,96,48,' },
+        { x: 0.5, y: 0.8, r: 0.25, speed: 0.1, color: 'rgba(122,74,138,' }
+      ];
+
+      // Floating particles — tiny warm lights
+      for (let i = 0; i < 40; i++) {
+        drops.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          r: Math.random() * 2 + 0.5,
-          alpha: Math.random() * 0.4 + 0.1
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+          r: Math.random() * 1.5 + 0.3,
+          alpha: Math.random() * 0.25 + 0.05
         });
       }
 
       function draw() {
-        time += 0.003;
+        time += 0.002;
         ctx.clearRect(0, 0, w, h);
 
-        // Animated gradient background
-        const cx1 = 0.3 + 0.2 * Math.sin(time * 0.5);
-        const cy1 = 0.3 + 0.2 * Math.cos(time * 0.7);
-        const cx2 = 0.7 + 0.2 * Math.sin(time * 0.3 + 2);
-        const cy2 = 0.7 + 0.2 * Math.cos(time * 0.4 + 1);
-
-        const grad = ctx.createRadialGradient(
-          w * cx1, h * cy1, 0,
-          w * cx1, h * cy1, w * 0.8
-        );
-        grad.addColorStop(0, '#0d0d1a');
-        grad.addColorStop(0.4, '#0a0a18');
-        grad.addColorStop(1, '#060610');
-
-        const grad2 = ctx.createRadialGradient(
-          w * cx2, h * cy2, 0,
-          w * cx2, h * cy2, w * 0.6
-        );
-        grad2.addColorStop(0, 'rgba(0,240,255,0.03)');
-        grad2.addColorStop(0.5, 'rgba(255,64,192,0.02)');
-        grad2.addColorStop(1, 'transparent');
-
+        // Base gradient — deep navy to warm dark
+        const grad = ctx.createRadialGradient(w*0.5, h*0.4, 0, w*0.5, h*0.4, w*0.7);
+        grad.addColorStop(0, '#100e1e');
+        grad.addColorStop(0.5, '#0c0b16');
+        grad.addColorStop(1, '#08070e');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
-        ctx.fillStyle = grad2;
-        ctx.fillRect(0, 0, w, h);
 
-        // Subtle grid lines
-        ctx.strokeStyle = 'rgba(255,255,255,0.015)';
+        // Warm orbs — slow breathing
+        orbs.forEach((orb, i) => {
+          const ox = w * orb.x + Math.sin(time * orb.speed + i * 2) * w * 0.05;
+          const oy = h * orb.y + Math.cos(time * orb.speed * 0.7 + i * 3) * h * 0.04;
+          const pulse = 0.6 + 0.4 * Math.sin(time * 0.5 + i);
+          const r = w * orb.r * (0.5 + 0.5 * pulse);
+          const g = ctx.createRadialGradient(ox, oy, 0, ox, oy, r);
+          g.addColorStop(0, orb.color + '0.025)');
+          g.addColorStop(0.5, orb.color + '0.012)');
+          g.addColorStop(1, 'transparent');
+          ctx.fillStyle = g;
+          ctx.fillRect(ox - r, oy - r, r * 2, r * 2);
+        });
+
+        // Subtle horizontal lines — bukan grid, seperti garis horizon
+        ctx.strokeStyle = 'rgba(255,255,255,0.012)';
         ctx.lineWidth = 1;
-        const gridSize = 60;
-        for (let x = 0; x < w; x += gridSize) {
-          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
-        }
-        for (let y = 0; y < h; y += gridSize) {
-          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+        for (let y = 0; y < h; y += 80) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(w, y);
+          ctx.stroke();
         }
 
         // Particles
-        particles.forEach(p => {
+        drops.forEach(p => {
           p.x += p.vx;
           p.y += p.vy;
           if (p.x < 0) p.x = w;
@@ -823,21 +909,21 @@
 
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(150,150,200,${p.alpha})`;
+          ctx.fillStyle = `rgba(200,190,220,${p.alpha})`;
           ctx.fill();
         });
 
-        // Draw connections between nearby particles
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
+        // Subtle connections
+        for (let i = 0; i < drops.length; i++) {
+          for (let j = i + 1; j < drops.length; j++) {
+            const dx = drops[i].x - drops[j].x;
+            const dy = drops[i].y - drops[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
+            if (dist < 100) {
               ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = `rgba(100,100,180,${0.06 * (1 - dist / 120)})`;
+              ctx.moveTo(drops[i].x, drops[i].y);
+              ctx.lineTo(drops[j].x, drops[j].y);
+              ctx.strokeStyle = `rgba(180,170,200,${0.03 * (1 - dist / 100)})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -889,23 +975,17 @@
       const winId = 'win_' + (state.nextWinId++);
       const [defW, defH] = app.defaultSize;
       const vw = window.innerWidth;
-      const vh = window.innerHeight - 60;
-      const offset = (state.nextWinId % 8) * 20;
-      const x = Math.min(60 + offset, vw - defW - 40);
-      const y = Math.min(40 + offset, vh - defH - 40);
+      const vh = window.innerHeight - 52;
+      const offset = (state.nextWinId % 8) * 18;
+      const x = Math.min(50 + offset, vw - defW - 30);
+      const y = Math.min(30 + offset, vh - defH - 30);
 
       const win = {
-        id: winId,
-        appId: appId,
-        title: app.name,
+        id: winId, appId, title: app.name,
         icon: app.icon,
-        x: Math.max(20, x),
-        y: Math.max(20, y),
-        w: defW,
-        h: defH,
-        minimized: false,
-        maximized: false,
-        prevRect: null
+        x: Math.max(16, x), y: Math.max(16, y),
+        w: defW, h: defH,
+        minimized: false, maximized: false, prevRect: null
       };
 
       state.windows[winId] = win;
@@ -933,7 +1013,6 @@
       el.classList.toggle('maximized', win.maximized);
       el.classList.toggle('minimized', win.minimized);
 
-      // Titlebar
       el.innerHTML = `
         <div class="win-titlebar">
           <span class="win-icon">${win.icon}</span>
@@ -941,21 +1020,16 @@
           <div class="win-controls">
             <button class="win-ctrl win-min" onclick="minWindow('${win.id}')" title="Minimize"></button>
             <button class="win-ctrl win-max" onclick="maxWindow('${win.id}')" title="Maximize"></button>
-            <button class="win-ctrl win-close" onclick="closeWindow('${win.id}')" title="Close"></button>
+            <button class="win-ctrl win-close" onclick="closeWindow('${win.id}')" title="Close">${ICONS.close}</button>
           </div>
         </div>
         <div class="win-body" id="${win.id}_body"></div>
       `;
 
-      // Body content
       const body = document.getElementById(win.id + '_body');
       body.innerHTML = '';
       renderAppContent(win.appId, body, win.id, params);
-
-      // Drag
       makeDraggable(el, win);
-
-      // Focus
       el.addEventListener('mousedown', () => focusWindow(win.id));
     }
 
@@ -967,7 +1041,7 @@
         case 'editor': renderEditor(body, winId, params); break;
         case 'settings': renderSettings(body, winId); break;
         case 'about': renderAbout(body, winId); break;
-        default: body.innerHTML = '<p style="color:var(--ink-muted)">Unknown application.</p>';
+        default: body.innerHTML = '<p style="color:var(--ink-dim);font-size:13px;">Unknown application.</p>';
       }
     }
 
@@ -977,7 +1051,6 @@
       const el = document.getElementById(winId);
       if (el) el.style.zIndex = state.windowZ;
       state.focusedWin = winId;
-
       Object.keys(state.windows).forEach(id => {
         const e = document.getElementById(id);
         if (e) e.classList.toggle('focused', id === winId);
@@ -1014,10 +1087,8 @@
         win.maximized = true;
       } else {
         if (win.prevRect) {
-          win.x = win.prevRect.x;
-          win.y = win.prevRect.y;
-          win.w = win.prevRect.w;
-          win.h = win.prevRect.h;
+          win.x = win.prevRect.x; win.y = win.prevRect.y;
+          win.w = win.prevRect.w; win.h = win.prevRect.h;
         }
         win.maximized = false;
       }
@@ -1025,10 +1096,8 @@
       if (el) {
         el.classList.toggle('maximized');
         if (!win.maximized) {
-          el.style.left = win.x + 'px';
-          el.style.top = win.y + 'px';
-          el.style.width = win.w + 'px';
-          el.style.height = win.h + 'px';
+          el.style.left = win.x + 'px'; el.style.top = win.y + 'px';
+          el.style.width = win.w + 'px'; el.style.height = win.h + 'px';
         }
       }
     }
@@ -1041,28 +1110,20 @@
         if (e.target.closest('.win-controls')) return;
         if (win.maximized) return;
         isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        startL = win.x;
-        startT = win.y;
+        startX = e.clientX; startY = e.clientY;
+        startL = win.x; startT = win.y;
         el.style.cursor = 'grabbing';
       });
 
       document.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-        win.x = Math.max(0, startL + dx);
-        win.y = Math.max(0, startT + dy);
-        el.style.left = win.x + 'px';
-        el.style.top = win.y + 'px';
+        win.x = Math.max(0, startL + e.clientX - startX);
+        win.y = Math.max(0, startT + e.clientY - startY);
+        el.style.left = win.x + 'px'; el.style.top = win.y + 'px';
       });
 
       document.addEventListener('mouseup', () => {
-        if (isDragging) {
-          isDragging = false;
-          el.style.cursor = '';
-        }
+        if (isDragging) { isDragging = false; el.style.cursor = ''; }
       });
 
       // Resize
@@ -1070,7 +1131,7 @@
 
       el.addEventListener('mousedown', (e) => {
         const rect = el.getBoundingClientRect();
-        const border = 8;
+        const border = 7;
         let dir = '';
         if (e.clientX >= rect.right - border) dir += 'e';
         if (e.clientX <= rect.left + border) dir += 'w';
@@ -1078,44 +1139,29 @@
         if (e.clientY <= rect.top + border) dir += 'n';
         if (!dir || win.maximized) return;
 
-        isResizing = true;
-        resizeDir = dir;
-        startRX = e.clientX;
-        startRY = e.clientY;
-        startRW = win.w;
-        startRH = win.h;
-        startRL = win.x;
-        startRT = win.y;
+        isResizing = true; resizeDir = dir;
+        startRX = e.clientX; startRY = e.clientY;
+        startRW = win.w; startRH = win.h;
+        startRL = win.x; startRT = win.y;
         e.preventDefault();
       });
 
       document.addEventListener('mousemove', (e) => {
         if (!isResizing) return;
-        const dx = e.clientX - startRX;
-        const dy = e.clientY - startRY;
-        const minW = 280, minH = 180;
+        const dx = e.clientX - startRX, dy = e.clientY - startRY;
+        const minW = 260, minH = 160;
 
-        if (resizeDir.includes('e')) {
-          win.w = Math.max(minW, startRW + dx);
-          el.style.width = win.w + 'px';
-        }
+        if (resizeDir.includes('e')) { win.w = Math.max(minW, startRW + dx); el.style.width = win.w + 'px'; }
         if (resizeDir.includes('w')) {
           const newW = Math.max(minW, startRW - dx);
-          win.w = newW;
-          win.x = startRL + (startRW - newW);
-          el.style.width = newW + 'px';
-          el.style.left = win.x + 'px';
+          win.w = newW; win.x = startRL + (startRW - newW);
+          el.style.width = newW + 'px'; el.style.left = win.x + 'px';
         }
-        if (resizeDir.includes('s')) {
-          win.h = Math.max(minH, startRH + dy);
-          el.style.height = win.h + 'px';
-        }
+        if (resizeDir.includes('s')) { win.h = Math.max(minH, startRH + dy); el.style.height = win.h + 'px'; }
         if (resizeDir.includes('n')) {
           const newH = Math.max(minH, startRH - dy);
-          win.h = newH;
-          win.y = startRT + (startRH - newH);
-          el.style.height = newH + 'px';
-          el.style.top = win.y + 'px';
+          win.h = newH; win.y = startRT + (startRH - newH);
+          el.style.height = newH + 'px'; el.style.top = win.y + 'px';
         }
       });
 
@@ -1131,7 +1177,7 @@
       list.innerHTML = '';
       Object.values(state.windows).forEach(win => {
         const btn = document.createElement('button');
-        btn.className = 'tb-task' + (win.id === state.focusedWin ? ' active' : '') + (win.minimized ? '' : '');
+        btn.className = 'tb-task' + (win.id === state.focusedWin ? ' active' : '');
         btn.innerHTML = `<span class="task-icon">${win.icon}</span><span class="task-label">${win.title}</span>`;
         btn.onclick = () => {
           if (win.minimized) {
@@ -1157,11 +1203,8 @@
       document.getElementById('startBtn').classList.remove('active');
     }
 
-    // Close start menu on outside click
     document.addEventListener('click', (e) => {
-      if (state.startOpen && !e.target.closest('#startMenu') && !e.target.closest('#startBtn')) {
-        closeStart();
-      }
+      if (state.startOpen && !e.target.closest('#startMenu') && !e.target.closest('#startBtn')) closeStart();
     });
 
     // ===================================================================
@@ -1178,7 +1221,7 @@
     updateClock();
 
     // ===================================================================
-    //  START MENU APPS
+    //  START MENU
     // ===================================================================
 
     function renderStartMenu() {
@@ -1200,33 +1243,26 @@
     function getDir(path) {
       let node = state.fileSystem;
       for (const part of path) {
-        if (node[part] && node[part].type === 'folder') {
-          node = node[part].children;
-        } else {
-          return null;
-        }
+        if (node[part] && node[part].type === 'folder') node = node[part].children;
+        else return null;
       }
       return node;
     }
 
-    function getPathStr(path) {
-      return '/' + path.join('/').replace(/^~/, 'home');
-    }
+    function getPathStr(path) { return '/' + path.join('/').replace(/^~/, 'home'); }
 
     function renderFileManager(body, winId) {
-      const currentPath = state.currentDir;
-      const dir = getDir(currentPath);
+      const dir = getDir(state.currentDir);
       if (!dir) return;
 
       body.innerHTML = `
         <div class="fm-toolbar">
-          <button class="fm-btn" onclick="fmBack('${winId}')" title="Back">◀</button>
-          <button class="fm-btn" onclick="fmForward('${winId}')" title="Forward">▶</button>
-          <div class="fm-path"><span>${getPathStr(currentPath)}</span></div>
+          <button class="fm-nav-btn" onclick="fmBack('${winId}')" title="Back">${ICONS.back}</button>
+          <button class="fm-nav-btn" onclick="fmForward('${winId}')" title="Forward">${ICONS.forward}</button>
+          <div class="fm-path"><span>${getPathStr(state.currentDir)}</span></div>
         </div>
         <div class="fm-grid" id="fmGrid_${winId}"></div>
       `;
-
       fmRenderGrid(winId, dir);
     }
 
@@ -1235,16 +1271,14 @@
       if (!grid) return;
       grid.innerHTML = '';
 
-      // Parent dir
       if (state.currentDir.length > 1) {
         const up = document.createElement('div');
         up.className = 'fm-item folder';
-        up.innerHTML = '<div class="fm-icon">📂</div><span>..</span>';
+        up.innerHTML = `<div class="fm-icon">${ICONS.folderOpen}</div><span>..</span>`;
         up.onclick = () => {
           state.currentDir.pop();
           const d = getDir(state.currentDir);
           if (d) fmRenderGrid(winId, d);
-          // Update path
           const pathEl = grid.parentElement.querySelector('.fm-path span');
           if (pathEl) pathEl.textContent = getPathStr(state.currentDir);
         };
@@ -1255,7 +1289,7 @@
         const entry = dir[name];
         const item = document.createElement('div');
         item.className = 'fm-item' + (entry.type === 'folder' ? ' folder' : '');
-        item.innerHTML = `<div class="fm-icon">${entry.type === 'folder' ? '📁' : '📄'}</div><span>${name}</span>`;
+        item.innerHTML = `<div class="fm-icon">${entry.type === 'folder' ? ICONS.folder : ICONS.fileDoc}</div><span>${name}</span>`;
         item.onclick = () => {
           if (entry.type === 'folder') {
             state.dirHistory = state.dirHistory.slice(0, state.dirHistoryIdx + 1);
@@ -1304,14 +1338,14 @@
       body.className = 'terminal-body';
       body.innerHTML = `
         <div class="terminal-output" id="termOut_${winId}">
-          <div class="t-line t-cyan">╔══════════════════════════════════╗</div>
-          <div class="t-line t-cyan">║     NyxOS Terminal v1.0         ║</div>
-          <div class="t-line t-cyan">╚══════════════════════════════════╝</div>
-          <div class="t-line t-dim">Type 'help' for available commands.</div>
+          <div class="t-line t-gold">╭──────────────────────────────╮</div>
+          <div class="t-line t-gold">│     NyxOS Terminal v2.0      │</div>
+          <div class="t-line t-gold">╰──────────────────────────────╯</div>
+          <div class="t-line t-dim">Type 'help' for commands.</div>
           <div class="t-line">&nbsp;</div>
         </div>
         <div class="terminal-input-line">
-          <span class="terminal-prompt">nyx@NyxOS:~$</span>
+          <span class="terminal-prompt">nyx:~$</span>
           <input class="terminal-input" id="termIn_${winId}" type="text" spellcheck="false" autofocus />
         </div>
       `;
@@ -1323,12 +1357,11 @@
         if (e.key === 'Enter') {
           const cmd = input.value.trim();
           input.value = '';
-          output.innerHTML += `<div class="t-line"><span class="t-green">nyx@NyxOS:~$</span> ${cmd}</div>`;
+          output.innerHTML += `<div class="t-line"><span class="t-gold">nyx:~$</span> ${cmd}</div>`;
           processTermCommand(cmd, output);
           output.scrollTop = output.scrollHeight;
         }
       });
-
       setTimeout(() => input.focus(), 100);
     }
 
@@ -1338,93 +1371,64 @@
 
       const cmds = {
         help: () => {
-          output.innerHTML += `<div class="t-line t-cyan">Available commands:</div>`;
+          output.innerHTML += `<div class="t-line t-gold">Available commands:</div>`;
           const list = [
-            'help      — Show this help',
-            'clear     — Clear terminal',
-            'echo      — Echo text',
-            'date      — Show current date/time',
-            'whoami    — Show current user',
-            'neofetch  — Show system info',
-            'ls        — List files (simulated)',
-            'uname     — Show OS info',
-            'uptime    — Show system uptime',
-            'calc      — Open calculator',
-            'editor    — Open text editor',
-            'nyx       — NyxOS easter egg'
+            'help     — Show this help',
+            'clear    — Clear terminal',
+            'echo     — Echo text',
+            'date     — Show current date/time',
+            'whoami   — Show current user',
+            'neofetch — Show system info',
+            'ls       — List files',
+            'uname    — Show OS info',
+            'uptime   — Show system uptime',
+            'calc     — Open calculator',
+            'editor   — Open text editor',
+            'nyx      — NyxOS easter egg'
           ];
-          list.forEach(l => {
-            output.innerHTML += `<div class="t-line t-dim">  ${l}</div>`;
-          });
+          list.forEach(l => output.innerHTML += `<div class="t-line t-dim">  ${l}</div>`);
         },
         clear: () => { output.innerHTML = ''; },
-        echo: () => {
-          const text = parts.slice(1).join(' ') || '';
-          output.innerHTML += `<div class="t-line">${text}</div>`;
-        },
-        date: () => {
-          output.innerHTML += `<div class="t-line">${new Date().toString()}</div>`;
-        },
-        whoami: () => {
-          output.innerHTML += `<div class="t-line t-green">nyx</div>`;
-        },
+        echo: () => { output.innerHTML += `<div class="t-line">${parts.slice(1).join(' ') || ''}</div>`; },
+        date: () => { output.innerHTML += `<div class="t-line">${new Date().toString()}</div>`; },
+        whoami: () => { output.innerHTML += `<div class="t-line t-gold">nyx</div>`; },
         neofetch: () => {
           output.innerHTML += `
-            <div class="t-line"><span class="t-magenta">nyx@NyxOS</span></div>
-            <div class="t-line t-dim">OS: NyxOS 1.0 (NyxCore)</div>
-            <div class="t-line t-dim">Kernel: Nyx v1.0.0</div>
-            <div class="t-line t-dim">Shell: nyxsh 1.0</div>
+            <div class="t-line"><span class="t-gold">nyx@NyxOS</span></div>
+            <div class="t-line t-dim">OS: NyxOS 2.0 (Midnight Luxe)</div>
+            <div class="t-line t-dim">Kernel: NyxCore v2.0.0</div>
+            <div class="t-line t-dim">Shell: nyxsh 2.0</div>
             <div class="t-line t-dim">Resolution: ${window.innerWidth}x${window.innerHeight}</div>
             <div class="t-line t-dim">DE: NyxDesktop</div>
-            <div class="t-line t-dim">Theme: NyxDark</div>
+            <div class="t-line t-dim">Theme: Midnight Luxe</div>
           `;
         },
         ls: () => {
           const dir = getDir(state.currentDir);
-          if (dir) {
-            const items = Object.keys(dir);
-            output.innerHTML += `<div class="t-line t-dim">${items.join('  ')}</div>`;
-          }
+          if (dir) output.innerHTML += `<div class="t-line t-dim">${Object.keys(dir).join('  ')}</div>`;
         },
-        uname: () => {
-          output.innerHTML += `<div class="t-line t-cyan">NyxOS</div>`;
-        },
+        uname: () => { output.innerHTML += `<div class="t-line t-gold">NyxOS</div>`; },
         uptime: () => {
           const s = Math.floor((Date.now() - bootTime) / 1000);
           const m = Math.floor(s / 60);
           const h = Math.floor(m / 60);
           output.innerHTML += `<div class="t-line t-dim">up ${h}h ${m % 60}m ${s % 60}s</div>`;
         },
-        calc: () => {
-          output.innerHTML += `<div class="t-line t-yellow">Opening Calculator...</div>`;
-          // Find the window and open calculator
-          const winEl = output.closest('.window');
-          if (winEl) {
-            const winId = winEl.id;
-            // We need to find the parent window id
-          }
-          openApp('calculator');
-        },
-        editor: () => {
-          output.innerHTML += `<div class="t-line t-yellow">Opening Text Editor...</div>`;
-          openApp('editor');
-        },
+        calc: () => { output.innerHTML += `<div class="t-line t-ember">Opening Calculator...</div>`; openApp('calculator'); },
+        editor: () => { output.innerHTML += `<div class="t-line t-ember">Opening Text Editor...</div>`; openApp('editor'); },
         nyx: () => {
           output.innerHTML += `
-            <div class="t-line t-magenta">  ╔═══╗ ║ ║ ║ ╔══╗</div>
-            <div class="t-line t-magenta">  ║ ══╣ ║ ║ ║ ║ ║</div>
-            <div class="t-line t-magenta">  ║ ══╣ ║ ║ ║ ║ ║</div>
-            <div class="t-line t-magenta">  ╚═══╝ ╚═╩═╝ ╚══╝</div>
-            <div class="t-line t-cyan">  NyxOS — Beyond the veil.</div>
+            <div class="t-line t-gold">  ╔═══╗ ║ ║ ║ ╔══╗</div>
+            <div class="t-line t-gold">  ║ ══╣ ║ ║ ║ ║ ║</div>
+            <div class="t-line t-gold">  ║ ══╣ ║ ║ ║ ║ ║</div>
+            <div class="t-line t-gold">  ╚═══╝ ╚═╩═╝ ╚══╝</div>
+            <div class="t-line t-plum">  NyxOS — Beyond the veil.</div>
           `;
         }
       };
 
-      if (cmds[main]) {
-        cmds[main]();
-      } else if (main) {
-        output.innerHTML += `<div class="t-line t-red">Command not found: ${main}</div>`;
-      }
+      if (cmds[main]) cmds[main]();
+      else if (main) output.innerHTML += `<div class="t-line t-ember">Command not found: ${main}</div>`;
     }
 
     let bootTime = Date.now();
@@ -1435,10 +1439,7 @@
 
     function renderCalculator(body, winId) {
       body.className = 'calc-body';
-      let display = '0';
-      let expression = '';
-      let result = null;
-      let justEvaluated = false;
+      let display = '0', expression = '', justEvaluated = false;
 
       const displayDiv = document.createElement('div');
       displayDiv.className = 'calc-display';
@@ -1455,22 +1456,16 @@
         { l: '0', cls: '' }, { l: '.', cls: '' }, { l: '⌫', cls: 'fn' }, { l: '=', cls: 'eq' }
       ];
 
-      function updateDisplay() {
-        displayDiv.textContent = display;
-      }
+      function updateDisplay() { displayDiv.textContent = display; }
 
       function handleInput(val) {
         if (justEvaluated && !'+-×÷'.includes(val)) {
           if (val === 'C') { clear(); return; }
-          if (/\d/.test(val)) {
-            expression = '';
-            display = '0';
-            justEvaluated = false;
-          }
+          if (/\d/.test(val)) { expression = ''; display = '0'; justEvaluated = false; }
         }
         justEvaluated = false;
 
-        if (val === 'C') { clear(); }
+        if (val === 'C') clear();
         else if (val === '⌫') {
           if (display.length > 1) display = display.slice(0, -1);
           else display = '0';
@@ -1478,17 +1473,13 @@
         }
         else if (val === '±') {
           if (display !== '0') {
-            if (display.startsWith('-')) display = display.slice(1);
-            else display = '-' + display;
+            display = display.startsWith('-') ? display.slice(1) : '-' + display;
             expression = display;
           }
         }
         else if (val === '%') {
           const num = parseFloat(display);
-          if (!isNaN(num)) {
-            display = String(num / 100);
-            expression = display;
-          }
+          if (!isNaN(num)) { display = String(num / 100); expression = display; }
         }
         else if ('+-×÷'.includes(val)) {
           const opMap = { '+': '+', '−': '-', '×': '*', '÷': '/' };
@@ -1499,37 +1490,20 @@
           try {
             const evalExpr = expression.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
             const res = Function('"use strict"; return (' + evalExpr + ')')();
-            display = String(res);
-            expression = String(res);
-            result = res;
-            justEvaluated = true;
-          } catch (e) {
-            display = 'Error';
-            expression = '';
-            justEvaluated = true;
-          }
+            display = String(res); expression = String(res); justEvaluated = true;
+          } catch (e) { display = 'Error'; expression = ''; justEvaluated = true; }
         }
         else if (val === '.') {
-          if (!display.includes('.')) {
-            display += '.';
-            expression += '.';
-          }
+          if (!display.includes('.')) { display += '.'; expression += '.'; }
         }
         else {
           if (display === '0' || '+-×÷'.includes(display)) display = '';
-          display += val;
-          expression += val;
+          display += val; expression += val;
         }
         updateDisplay();
       }
 
-      function clear() {
-        display = '0';
-        expression = '';
-        result = null;
-        justEvaluated = false;
-        updateDisplay();
-      }
+      function clear() { display = '0'; expression = ''; justEvaluated = false; updateDisplay(); }
 
       buttons.forEach(b => {
         const btn = document.createElement('button');
@@ -1542,7 +1516,6 @@
       body.appendChild(displayDiv);
       body.appendChild(grid);
 
-      // Keyboard support
       const keyHandler = (e) => {
         const keyMap = {
           '0':'0','1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9',
@@ -1550,21 +1523,11 @@
           'Escape':'C','c':'C','%':'%'
         };
         const mapped = keyMap[e.key];
-        if (mapped) {
-          e.preventDefault();
-          handleInput(mapped);
-        }
+        if (mapped) { e.preventDefault(); handleInput(mapped); }
       };
 
       const winEl = document.getElementById(winId);
       winEl.addEventListener('keydown', keyHandler);
-      // Cleanup on close
-      const observer = new MutationObserver(() => {
-        if (!document.getElementById(winId)) {
-          observer.disconnect();
-        }
-      });
-      observer.observe(document.getElementById('windowsContainer'), { childList: true });
     }
 
     // ===================================================================
@@ -1578,9 +1541,9 @@
 
       body.innerHTML = `
         <div class="editor-toolbar">
-          <button class="ed-btn" onclick="editorSave('${winId}')">💾 Save</button>
-          <button class="ed-btn" onclick="editorClear('${winId}')">🗑️ Clear</button>
-          <span style="margin-left:auto;font-size:11px;color:var(--ink-muted);font-family:var(--font-mono)">${fileName}</span>
+          <button class="ed-btn" onclick="editorSave('${winId}')">${ICONS.save} Save</button>
+          <button class="ed-btn" onclick="editorClear('${winId}')">${ICONS.trash} Clear</button>
+          <span style="margin-left:auto;font-size:10px;color:var(--ink-dim);font-family:var(--font-mono)">${fileName}</span>
         </div>
         <textarea class="editor-textarea" id="edArea_${winId}" spellcheck="false">${content}</textarea>
       `;
@@ -1594,7 +1557,7 @@
     function editorSave(winId) {
       const ta = document.getElementById('edArea_' + winId);
       if (!ta) return;
-      notify('💾', 'Saved', 'Content saved to memory (session).');
+      notify(ICONS.save, 'Saved', 'Content saved to session memory.');
     }
 
     function editorClear(winId) {
@@ -1616,11 +1579,11 @@
             <div class="toggle on" onclick="this.classList.toggle('on')"></div>
           </div>
           <div class="setting-row">
-            <div class="setting-label">Wallpaper <small>Desktop background style</small></div>
+            <div class="setting-label">Wallpaper <small>Desktop background</small></div>
             <select class="select-input" onchange="changeWallpaper(this.value)">
-              <option value="gradient">Nyx Gradient</option>
+              <option value="midnight">Midnight Luxe</option>
               <option value="dark">Deep Dark</option>
-              <option value="cyber">Cyber Grid</option>
+              <option value="warm">Warm Ember</option>
             </select>
           </div>
         </div>
@@ -1631,23 +1594,22 @@
             <div class="toggle on" onclick="this.classList.toggle('on')"></div>
           </div>
           <div class="setting-row">
-            <div class="setting-label">Animations <small>UI animations & effects</small></div>
+            <div class="setting-label">Animations <small>UI motion effects</small></div>
             <div class="toggle on" onclick="this.classList.toggle('on')"></div>
           </div>
         </div>
         <div class="settings-group">
           <h3>About</h3>
           <div class="setting-row">
-            <div class="setting-label">NyxOS <small>Version 1.0.0</small></div>
-            <span style="font-size:11px;color:var(--ink-muted);font-family:var(--font-mono)">NyxCore</span>
+            <div class="setting-label">NyxOS <small>Version 2.0.0</small></div>
+            <span style="font-size:10px;color:var(--ink-dim);font-family:var(--font-mono)">Midnight Luxe</span>
           </div>
         </div>
       `;
     }
 
     function changeWallpaper(val) {
-      state.wallpaper = val;
-      notify('🎨', 'Wallpaper Changed', `Set to: ${val}`);
+      notify(ICONS.star, 'Wallpaper Changed', `Set to: ${val}`);
     }
 
     // ===================================================================
@@ -1659,19 +1621,17 @@
       body.innerHTML = `
         <div class="about-logo">N</div>
         <div class="about-name">NyxOS</div>
-        <div class="about-ver">Version 1.0.0 (NyxCore)</div>
+        <div class="about-ver">Version 2.0.0 — Midnight Luxe</div>
         <div class="about-desc">
-          A desktop operating system experience — running entirely in your browser.
+          A desktop operating system experience, running entirely in your browser.
           Built with vanilla HTML, CSS, and JavaScript.
         </div>
-        <div style="margin-top:8px;font-size:11px;color:var(--ink-muted);font-family:var(--font-mono)">
-          © 2025 Nyx Systems — Beyond the veil.
-        </div>
+        <div class="about-footer">© 2025 Nyx Systems</div>
       `;
     }
 
     // ===================================================================
-    //  NOTIFICATION SYSTEM
+    //  NOTIFICATIONS
     // ===================================================================
 
     function notify(icon, title, text, duration = 3000) {
@@ -1683,14 +1643,14 @@
           <div class="notif-title">${title}</div>
           <div class="notif-text">${text}</div>
         </div>
-        <button class="notif-close" onclick="this.parentElement.remove()">✕</button>
+        <button class="notif-close" onclick="this.parentElement.remove()">${ICONS.close}</button>
       `;
       document.body.appendChild(notif);
       setTimeout(() => {
         if (notif.parentElement) {
           notif.style.transition = 'opacity 300ms, transform 300ms';
           notif.style.opacity = '0';
-          notif.style.transform = 'translateX(40px)';
+          notif.style.transform = 'translateX(36px)';
           setTimeout(() => notif.remove(), 300);
         }
       }, duration);
@@ -1701,25 +1661,10 @@
     // ===================================================================
 
     document.addEventListener('keydown', (e) => {
-      // Ctrl+Alt+T — Terminal
-      if (e.ctrlKey && e.altKey && e.key === 't') {
-        e.preventDefault();
-        openApp('terminal');
-      }
-      // Escape — Close start menu
-      if (e.key === 'Escape' && state.startOpen) {
-        closeStart();
-      }
-      // Alt+F4 — Close focused window
-      if (e.altKey && e.key === 'F4') {
-        e.preventDefault();
-        if (state.focusedWin) closeWindow(state.focusedWin);
-      }
-      // Ctrl+N — New editor
-      if (e.ctrlKey && e.key === 'n') {
-        e.preventDefault();
-        openApp('editor');
-      }
+      if (e.ctrlKey && e.altKey && e.key === 't') { e.preventDefault(); openApp('terminal'); }
+      if (e.key === 'Escape' && state.startOpen) closeStart();
+      if (e.altKey && e.key === 'F4') { e.preventDefault(); if (state.focusedWin) closeWindow(state.focusedWin); }
+      if (e.ctrlKey && e.key === 'n') { e.preventDefault(); openApp('editor'); }
     });
 
     // ===================================================================
@@ -1733,13 +1678,11 @@
       updateTaskbar();
       updateClock();
 
-      // Welcome notification
       setTimeout(() => {
-        notify('🚀', 'Welcome to NyxOS', 'Click icons to open apps. Ctrl+Alt+T for Terminal.');
+        notify(ICONS.star, 'Welcome to NyxOS', 'Double-click icons to launch apps. Ctrl+Alt+T for Terminal.');
       }, 600);
     }
 
-    // Start boot
     boot();
   </script>
 </body>
